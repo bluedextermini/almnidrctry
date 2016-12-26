@@ -1,0 +1,14 @@
+<div display='inline'>
+<ol>
+  <li ng-repeat='alumni in fad.found'>
+    <label for="">{{alumni.gsx$name.$t}}</label>
+    <label for="">{{alumni.gsx$phonenumber.$t}}</label>
+	<label for="">{{alumni.gsx$email.$t}}</label>
+	<label for="">{{alumni.gsx$address.$t}}</label>
+	<label for="">{{alumni.gsx$bloodgroup.$t}}</label>
+	<label for="">{{alumni.gsx$commentsideatoimprovealumnievent.$t}}</label>
+    <button type="button" name="button" ng-click="remove({'index':'{{$index}}'})">Don't want this one!</button>
+  </li>
+</ol>
+
+</div>
