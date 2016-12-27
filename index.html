@@ -9,8 +9,10 @@
 <script src="angular.min.js" charset="utf-8"></script>
 <script src="app.js" charset="utf-8"></script>
 <body ng-app='NarrowItDownApp'>
- <!--   <div class="container" ng-controller='NarrowItDownController as search'>
-    <h1>Narrow Down Your Chinese Menu Choice</h1>
+
+
+   <div class="container" ng-controller='AlumniSearchController as search'>
+    <h1>Narrow Down Your Search: Alumni Search</h1>
 
     <div class="form-group">
       <input type="text" placeholder="search term" ng-model='search.searchTerm' class="form-control">
@@ -20,24 +22,9 @@
     </div>
 
     <!-- found-items should be implemented as a component -->
-    <!-- <div ng-if='search.found.length>0'>test</div>
-    <found-items ng-if='search.found.length>0' found='search.found'  onRemove='search.dontWantThisOne(index)'></found-items>
-  </div> -->
-  
-  
-    <div class="container" ng-controller='AlumniSearchController as search'>
-    <h1>Narrow Down Your Search</h1>
-
-    <div class="form-group">
-      <input type="text" placeholder="search term" ng-model='search.searchTerm' class="form-control">
-    </div>
-    <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click='search.narrowItDown()'>Narrow It Down For Me!</button>
-    </div>
-
-    <!-- found-items should be implemented as a component -->
-    <div ng-if='search.found.length>0'>test</div>
-    <found-alumni ng-if='search.found.length>0' found='search.found'  onRemove='search.dontWantThisOne(index)'></found-alumni>
+    <!-- <div ng-if='search.found.length>0'>test</div> -->
+    <found-alumni ng-if='search.found.length>0' found="search.found"  remove="search.dontWantThisOne(index)"></found-alumni>
+	 <span ng-show='search.found.length===0' >Nobody found with realted search term</span>
   </div>
 
 </body>

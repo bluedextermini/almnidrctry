@@ -53,10 +53,12 @@
     console.log('alumni directive found ::fad.found',alumniDirectiveCtrl.found);
   }
 
+  
   NarrowItDownController.$inject=['MenuSearchService'];
   function NarrowItDownController(MenuSearchService){
     var search=this;
     search.searchTerm="";
+	
     search.narrowItDown=function(){
       console.log("search.searchTerm::",search.searchTerm);
       MenuSearchService.getMatchedMenuItems(search.searchTerm).then(function(result){
@@ -72,19 +74,43 @@
     return search;
   }
   
+  
   AlumniSearchController.$inject=['AlumniSearchService'];
   function AlumniSearchController(AlumniSearchService){
     var search=this;
     search.searchTerm="";
+	//search.found=null;
     search.narrowItDown=function(){
       console.log("alumni search.searchTerm::",search.searchTerm);
-      AlumniSearchService.getMatchedAlumni(search.searchTerm).then(function(result){
-        search.found=result;
-        console.log("controller found Items Length::",search.found.length);
-        console.log("controller found Items",search.found);
-      });
+	  //search.found=null;
+  
+	  /*var promise=AlumniSearchService.getMatchedAlumni(search.searchTerm);
+	   
+	   promise.then(
+		   function(result){
+			   console.log("successfull call to service");
+			   search.found=result;
+			   console.log("alumni:::controller found Items Length::",search.found.length);
+		   }, 
+		   function(error){
+			   
+			   console.log(error);
+		   }
+	   ); */
+	   
+   
+		  AlumniSearchService.getMatchedAlumni(search.searchTerm).then(function(result){
+			search.found=result;
+			//search.isButtonClicked=true;
+		  })
+		  .catch(function(error){
+			//search.isButtonClicked=true;
+			console.log("some error occured while fetching matched alumnis");
+		  });
     }
-
+	   
+        //console.log("controller found Items",search.found);
+     
     search.dontWantThisOne=function(index){
       search.found.splice(index,1);
     }
@@ -136,17 +162,21 @@
       var service=this;
       //service.founditems=undefined;
       service.getMatchedAlumni=function(searchTerm){
+		var deferred = $q.defer();
         service.searchTerm=searchTerm;
         $http({
-         url : "https://spreadsheets.google.com/feeds/list/1YdGsWLuPy2XkVUpe3Tw3Hbs7mTDflq6Bv9JsXjc9nyY/1/public/values?alt=json",
+         url : "https://spreadsheets.google.com/feeds/list/1YdGsWLuPy2XkVUpe3Tw3Hbs7mTDflq6Bv9JsXjc9nyY/1/public/values?alt=json"+"&random=" + Math.random(),
          method: 'GET'
        }).then(function (result) {
+			 //debugger;
               var alumniList= result.data.feed.entry;
               var foundAlumni;
              console.log('alumniList.length',alumniList.length);
-             console.log('Menu items',alumniList);
+             //console.log('Menu items',alumniList);
 
              foundAlumni=alumniList.filter(isMatchFound);
+			 
+			 console.log("filtered alumni list @controller", foundAlumni);
              deferred.resolve(foundAlumni);
              //console.log('foundItems',foundItems);
              // return processed items
@@ -158,9 +188,9 @@
        return deferred.promise;
       }
       var isMatchFound=function(value){
-		console.log("alumni value", value);
+		//console.log("alumni value", value);
         var match= (value.gsx$name.$t.toLowerCase().indexOf(service.searchTerm))>-1? true: false;
-        //console.log(value.description, match);
+        console.log(value.gsx$name.$t, match);
         return match;
       }
 
