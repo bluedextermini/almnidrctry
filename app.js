@@ -158,7 +158,7 @@
   
   AlumniSearchService.$inject=['$http','$q'];
   function AlumniSearchService($http, $q){
-      var deferred = $q.defer();
+      //var deferred = $q.defer();
       var service=this;
       //service.founditems=undefined;
       service.getMatchedAlumni=function(searchTerm){
@@ -189,8 +189,8 @@
       }
       var isMatchFound=function(value){
 		//console.log("alumni value", value);
-        var match= (value.gsx$name.$t.toLowerCase().indexOf(service.searchTerm))>-1? true: false;
-        console.log(value.gsx$name.$t, match);
+        var match= (value.content.$t.toLowerCase().indexOf(service.searchTerm))>-1? true: false;
+        console.log(value.content.$t, match);
         return match;
       }
 
