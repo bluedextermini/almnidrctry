@@ -15,17 +15,20 @@
     <h1>Narrow Down Your Search: Alumni Search</h1>
 
     <div class="form-group">
-      <input type="text" placeholder="search term" ng-model='search.searchTerm' class="form-control">
+      <input type="text" placeholder="search alumni with name or surname or city" ng-model='search.searchTerm' class="form-control" ng-change='search.narrowItDown()'>
     </div>
-    <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click='search.narrowItDown()'>Narrow It Down For Me!</button>
-    </div>
-
+   <!--  <div class="form-group narrow-button">
+      <button class="btn btn-primary" >Narrow It Down For Me!</button>
+    </div> -->
+	
     <!-- found-items should be implemented as a component -->
     <!-- <div ng-if='search.found.length>0'>test</div> -->
+	<div class="row">
     <found-alumni ng-if='search.found.length>0' found="search.found"  remove="search.dontWantThisOne(index)"></found-alumni>
 	 <span ng-show='search.found.length===0' >Nobody found with realted search term</span>
+	 </div>
   </div>
+  
 
 </body>
 </html>

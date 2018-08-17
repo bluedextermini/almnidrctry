@@ -1,14 +1,31 @@
-<div display='inline'>
+<div>
 <ul>
-  <li ng-repeat='alumni in fad.found'>
-    <label for="">{{alumni.gsx$name.$t}}</label>
-    <label for="">{{alumni.gsx$phonenumber.$t}}</label>
-	<label for="">{{alumni.gsx$email.$t}}</label>
-	<label for="">{{alumni.gsx$address.$t}}</label>
-	<label for="">{{alumni.gsx$bloodgroup.$t}}</label>
-	<label for="">{{alumni.gsx$commentsideatoimprovealumnievent.$t}}</label>
-    <button type="button" name="button" ng-click="fad.remove({'index':$index})">Don't want this one!</button>
-  </li>
+ 
+  <div ng-repeat='alumni in fad.found' class='row'>
+   <div class='col'><label for="">
+   {{alumni.gsx$name.$t}}</label>
+	</div>
+    <div class='col'>	
+    {{alumni.gsx$phonenumber.$t}}
+	</div>
+    <div class='col'>	
+	{{alumni.gsx$email.$t}}
+	</div>
+    <div class='col'>	
+	{{alumni.gsx$address.$t}}
+	</div>
+    <div class='col'>	
+	{{alumni.gsx$bloodgroup.$t}}
+	</div>
+    <div class='col'>	
+	{{alumni.gsx$commentsideatoimprovealumnievent.$t}}
+	</div>
+    <div class='col'>	
+		<button type="button" name="button" ng-click="fad.remove({'index':$index})">Remove</button>
+	</div>
+	</div>
+  </div>	
+ 
 </ul>
 
 </div>
